@@ -1,0 +1,46 @@
+import flatten from "lodash/flatten";
+import {
+  generateSolution,
+  generateRandomIndex,
+  generateInitialPositions
+} from "../src";
+
+describe("generateSolution", () => {
+  it("should generate a correct solution", () => {
+    const solution = generateSolution(2, 2);
+    expect(solution).toEqual([1, 2, 3, null]);
+  });
+
+  it("should generate a correct solution with bigger numbers", () => {
+    const solution = generateSolution(3, 4);
+    expect(solution).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, null]);
+  });
+});
+
+describe("generateRandomIndex", () => {
+  it("should generate an index that exists in the array", () => {
+    const index = generateRandomIndex([1, 2, 3, 4, 5, 6, 7, 8, null]);
+    expect(index).toBeGreaterThanOrEqual(0);
+    expect(index).toBeLessThan(9);
+  });
+});
+
+describe("generateInitialPositions", () => {
+  it("should generate an array with given numbers of rows", () => {
+    expect(generateInitialPositions(3, 4)).toHaveLength(3);
+  });
+
+  it("should generate an array with given numbers of columns", () => {
+    const positions = generateInitialPositions(3, 4);
+    positions.forEach(row => expect(row).toHaveLength(4));
+  });
+
+  it("should generate an array containing all required numbers", () => {
+    const positions = generateInitialPositions(3, 4);
+    const flattenPositions = flatten(positions);
+    for (let i = 1; i <= 11; i++) {
+      expect(flattenPositions).toContain(i);
+    }
+    expect(flattenPositions).toContain(null);
+  });
+});
