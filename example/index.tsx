@@ -9,8 +9,8 @@ const App = () => {
     <div>
       <Puzzle
         src={image}
-        columnsCount={2}
-        rowsCount={2}
+        columnsCount={3}
+        rowsCount={3}
         height={280}
         width={280}
         onFinish={() => console.log("Finished!!")}

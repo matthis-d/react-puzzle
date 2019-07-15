@@ -53,26 +53,8 @@ const move = (positions: Positions, number: number): Positions => {
   return positions;
 };
 
-export const generateRandomIndex = (
-  positions: Array<number | null>
-): number => {
-  return Math.floor(Math.random() * positions.length);
-};
-
-export const invertRandomly = (
-  positions: Array<number | null>
-): Array<number | null> => {
-  const random = generateRandomIndex(positions);
-  let random2 = generateRandomIndex(positions);
-  while (random2 === random) {
-    random2 = generateRandomIndex(positions);
-  }
-
-  return immer(positions, draft => {
-    const prevVal = draft[random];
-    draft[random] = draft[random2];
-    draft[random2] = prevVal;
-  });
+export const generateRandomIndex = (maxIndex: number): number => {
+  return Math.floor(Math.random() * maxIndex);
 };
 
 export const generateSolution = (rowsCount: number, columnsCount: number) => {
@@ -85,19 +67,41 @@ export const generateSolution = (rowsCount: number, columnsCount: number) => {
   return flatPositions;
 };
 
+// Code inspired by https://medium.com/@ssaurel/developing-a-15-puzzle-game-of-fifteen-in-java-dfe1359cc6e3
+export const isSolvable = (flatPositions: (number | null)[]): boolean => {
+  let countInversions = 0;
+  for (let i = 0; i < flatPositions.length; i++) {
+    for (let j = 0; j < i; j++) {
+      if (
+        flatPositions[j] !== null &&
+        flatPositions[i] !== null &&
+        // @ts-ignore values can't be null here
+        flatPositions[j] > flatPositions[i]
+      ) {
+        countInversions++;
+      }
+    }
+  }
+  return countInversions % 2 === 0;
+};
+
 export const generateInitialPositions = (
   rowsCount: number,
   columnsCount: number
 ): Positions => {
-  let flatPositions = generateSolution(rowsCount, columnsCount);
+  let flatPositions: (number | null)[] = [];
+  // Code inspired by https://medium.com/@ssaurel/developing-a-15-puzzle-game-of-fifteen-in-java-dfe1359cc6e3
+  do {
+    flatPositions = generateSolution(rowsCount, columnsCount);
 
-  const inversions = Math.floor(Math.random() * 20) + 1;
-  let inversionCount = 0;
-  while (inversionCount < inversions) {
-    flatPositions = invertRandomly(flatPositions);
-    flatPositions = invertRandomly(flatPositions);
-    inversionCount++;
-  }
+    let inversionCount = rowsCount * columnsCount - 1;
+    while (inversionCount > 1) {
+      const index = generateRandomIndex(inversionCount--);
+      const prevVal = flatPositions[index];
+      flatPositions[index] = flatPositions[inversionCount];
+      flatPositions[inversionCount] = prevVal;
+    }
+  } while (!isSolvable(flatPositions));
 
   let result: Positions = [];
   for (let rowIndex = 0; rowIndex < rowsCount; rowIndex++) {

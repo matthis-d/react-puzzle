@@ -18,10 +18,10 @@ describe("generateSolution", () => {
 });
 
 describe("generateRandomIndex", () => {
-  it("should generate an index that exists in the array", () => {
-    const index = generateRandomIndex([1, 2, 3, 4, 5, 6, 7, 8, null]);
+  it("should generate a number greater than 0 and lower than given value", () => {
+    const index = generateRandomIndex(16);
     expect(index).toBeGreaterThanOrEqual(0);
-    expect(index).toBeLessThan(9);
+    expect(index).toBeLessThan(16);
   });
 });
 
