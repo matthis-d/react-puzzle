@@ -1,20 +1,31 @@
 import "react-app-polyfill/ie11";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Puzzle } from "../.";
-import image from "./assets/igloo.jpg";
+import { PuzzleGame, Puzzle, usePuzzleDispatch } from "../.";
+import image from "./assets/christmas-cat.jpg";
+
+const ResetButton = () => {
+  const dispatch = usePuzzleDispatch();
+
+  return <button onClick={() => dispatch({ type: "reset" })}>Reset</button>;
+};
 
 const App = () => {
   return (
     <div>
-      <Puzzle
+      <PuzzleGame
         src={image}
-        columnsCount={3}
-        rowsCount={3}
+        columnsCount={2}
+        rowsCount={2}
         height={280}
         width={280}
         onFinish={() => console.log("Finished!!")}
-      />
+      >
+        <>
+          <Puzzle />
+          <ResetButton />
+        </>
+      </PuzzleGame>
     </div>
   );
 };

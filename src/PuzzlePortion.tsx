@@ -2,14 +2,15 @@ import * as React from "react";
 import styled from "styled-components";
 
 import { ImagePortion } from "./ImagePortion";
+import {
+  usePuzzleImage,
+  usePuzzlePortions,
+  usePuzzleDimensions
+} from "./PuzzleGame";
 
 interface Props {
-  src: string;
   number: number | null;
-  columnsCount: number;
-  rowsCount: number;
-  totalHeight: number;
-  totalWidth: number;
+  className?: string;
   onClick: Function;
 }
 
@@ -19,26 +20,27 @@ const EmptyImage = styled.div`
 
 export const PuzzlePortion = ({
   number,
-  src,
-  totalHeight,
-  totalWidth,
-  rowsCount,
-  columnsCount,
+  className,
   onClick = () => null
 }: Props) => {
+  const src = usePuzzleImage();
+  const { rowsCount, columnsCount } = usePuzzlePortions();
+  const { height, width } = usePuzzleDimensions();
+
   if (number === null) {
-    return <EmptyImage />;
+    return <EmptyImage className={className} />;
   }
 
   return (
     <ImagePortion
       onClick={e => onClick(e, number)}
-      totalHeight={totalHeight}
-      totalWidth={totalWidth}
+      totalHeight={height}
+      totalWidth={width}
       src={src}
       number={number}
       rowsCount={rowsCount}
       columnsCount={columnsCount}
+      className={className}
     />
   );
 };

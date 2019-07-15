@@ -3,7 +3,7 @@ import {
   generateSolution,
   generateRandomIndex,
   generateInitialPositions
-} from "../src";
+} from "../src/utils/generatePuzzle";
 
 describe("generateSolution", () => {
   it("should generate a correct solution", () => {
