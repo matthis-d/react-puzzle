@@ -41,6 +41,7 @@ export const PuzzlePortion = ({
       rowsCount={rowsCount}
       columnsCount={columnsCount}
       className={className}
+      title={`${number}`}
     />
   );
 };

@@ -19,7 +19,7 @@ const App = () => {
         rowsCount={3}
         height={280}
         width={280}
-        onFinish={() => console.log("Finished!!")}
+        onFinish={() => alert("Finished!!")}
       >
         <>
           <Puzzle />

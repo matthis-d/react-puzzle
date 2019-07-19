@@ -17,9 +17,10 @@ export const getXPosition = (
 
 export const getYPosition = (
   number: number,
+  columnsCount: number,
   rowsCount: number,
   height: number
-) => Math.floor((number - 1) / rowsCount) * (height / rowsCount);
+) => Math.floor(Math.floor((number - 1) / columnsCount) * (height / rowsCount));
 
 export const ImagePortion = styled.button<ImagePortionProps>`
   background: url(${props => props.src}) -${props =>
@@ -28,7 +29,12 @@ export const ImagePortion = styled.button<ImagePortionProps>`
         props.columnsCount,
         props.totalWidth
       )}px -${props =>
-      getYPosition(props.number, props.rowsCount, props.totalHeight)}px;
+      getYPosition(
+        props.number,
+        props.columnsCount,
+        props.rowsCount,
+        props.totalHeight
+      )}px;
   border: none;
   border-radius: 0;
   position: relative;
