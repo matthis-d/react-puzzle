@@ -1,3 +1,5 @@
+import isEqual from "lodash/isEqual";
+
 type Positions = (number | null)[][];
 
 export const generateRandomIndex = (maxIndex: number): number => {
@@ -49,8 +51,8 @@ export const generateInitialPositions = (
       flatPositions[inversionCount] = prevVal;
     }
   } while (
-    !isSolvable(flatPositions) &&
-    flatPositions !== generateSolution(rowsCount, columnsCount)
+    !isSolvable(flatPositions) ||
+    isEqual(flatPositions, generateSolution(rowsCount, columnsCount))
   );
 
   let result: Positions = [];

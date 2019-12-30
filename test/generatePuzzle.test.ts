@@ -43,4 +43,10 @@ describe("generateInitialPositions", () => {
     }
     expect(flattenPositions).toContain(null);
   });
+
+  it("should not generate an already solved puzzle", () => {
+    const positions = generateInitialPositions(2, 2);
+    const flattenPositions = flatten(positions);
+    expect(flattenPositions).not.toEqual([1, 2, 3, null]);
+  });
 });
