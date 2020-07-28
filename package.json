@@ -1,6 +1,6 @@
 {
   "name": "react-puzzle-game",
-  "version": "1.0.2",
+  "version": "0.0.0-development",
   "main": "dist/index.js",
   "module": "dist/react-puzzle-game.esm.js",
   "typings": "dist/index.d.ts",
@@ -10,14 +10,17 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
-    "test": "tsdx test --env=jsdom"
+    "test": "tsdx test --env=jsdom",
+    "semantic-release": "semantic-release",
+    "commit": "git-cz"
   },
   "peerDependencies": {
     "react": ">=16.8"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "pretty-quick --staged",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
   "prettier": {},
@@ -27,11 +30,14 @@
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
     "@types/styled-components": "^4.1.18",
+    "commitizen": "^4.1.2",
+    "cz-conventional-changelog": "3.2.0",
     "husky": "^3.0.0",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "semantic-release": "^17.1.1",
     "tsdx": "^0.7.2",
     "tslib": "^1.10.0",
     "typescript": "^3.5.3"
@@ -41,5 +47,14 @@
     "lodash": "^4.17.19",
     "lodash-es": "^4.17.14",
     "styled-components": "^4.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matthis-d/react-puzzle.git"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
