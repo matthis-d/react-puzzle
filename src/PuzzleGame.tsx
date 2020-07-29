@@ -149,7 +149,7 @@ function PuzzleGame({
     if (isEqual(flattenNumbers, solution)) {
       onFinish();
     }
-  }, [positions]);
+  }, [onFinish, positions, solution]);
 
   return (
     <PuzzlePositionsStateContext.Provider value={positions}>
