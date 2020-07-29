@@ -1,0 +1,41 @@
+---
+name: PuzzleGame
+route: /puzzle-game
+---
+
+import { Props, Playground } from "docz";
+import { PuzzleGame } from "./PuzzleGame.tsx";
+import { Puzzle } from "./Puzzle.tsx";
+import image from "../public/christmas-cat.jpg";
+
+## PuzzleGame
+
+It is the main element required to make it work.
+
+### Import
+
+```js
+import { PuzzleGame, Puzzle } from "react-puzzle-game";
+import image from "./file.jpg";
+```
+
+### How to use it
+
+<Playground>
+  <div>
+    <PuzzleGame
+      src={image}
+      columnsCount={3}
+      rowsCount={3}
+      height={280}
+      width={280}
+      onFinish={() => alert("Finished!!")}
+    >
+      <Puzzle />
+    </PuzzleGame>
+  </div>
+</Playground>
+
+### Props
+
+<Props of={PuzzleGame} />

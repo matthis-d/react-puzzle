@@ -11,7 +11,14 @@ import {
 } from "./PuzzleGame";
 
 interface PuzzleProps {
+  /**
+   * Classname to apply to the parent node.
+   */
   className?: string;
+
+  /**
+   * Classname to apply to each image portion.
+   */
   portionClassName?: string;
 }
 
