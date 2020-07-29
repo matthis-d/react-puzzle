@@ -1,4 +1,5 @@
 module.exports = {
   src: "./src",
-  typescript: true
+  typescript: true,
+  base: "/react-puzzle"
 };
