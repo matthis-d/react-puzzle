@@ -14,3 +14,15 @@ jobs:
         skip_cleanup: true
         script:
           - npx semantic-release
+    - stage: docs
+      node_js: lts/*
+      script: yarn docz:build
+      deploy:
+        provider: pages:git
+        edge: true
+        skip_cleanup: true
+        token: $GH_TOKEN # Set in the settings page of your repository, as a secure variable
+        keep_history: true
+        local_dir: ./.docz/dist
+        on:
+          branch: master
