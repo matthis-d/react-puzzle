@@ -17,12 +17,39 @@ type Action =
 type Dispatch = (action: Action) => void;
 type State = Positions;
 type PuzzleGameProps = {
+  /**
+   * Child components to display.
+   */
   children: React.ReactNode;
-  onFinish: Function;
+
+  /**
+   * The action to execute once the Puzzle is resolved.
+   */
+  onFinish: () => void;
+
+  /**
+   * Number of rows to display.
+   */
   rowsCount: number;
+
+  /**
+   * Number of columns to display.
+   */
   columnsCount: number;
+
+  /**
+   * Image source.
+   */
   src: string;
+
+  /**
+   * Height in pixels it should be displayed.
+   */
   height: number;
+
+  /**
+   * Width in pixels it should be displayed.
+   */
   width: number;
 };
 
